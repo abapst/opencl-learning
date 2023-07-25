@@ -5,8 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <chrono>
-
 #include <CL/cl.h>
+#include <opencv2/opencv.hpp>
 
 #include "Utils.h"
 
@@ -45,7 +45,7 @@ void VectorAdditionTest()
     // Load kernel source code into array
     char *source_str = 0;
     size_t source_size = 0;
-    const std::string kernelFile = "vector_add_kernel.cl";
+    const std::string kernelFile = "kernels/vector_addition.cl";
     if (!LoadKernelSource(kernelFile, &source_str, source_size))
     {
         return;
@@ -150,7 +150,12 @@ void VectorAdditionTest()
 
 void ImageProcessingTest()
 {
+    std::cout << "Running image processing test..." << std::endl;
 
+    cv::Mat image = cv::imread("data/test.jpg");
+
+    cv::imshow("Image Processing Test", image);
+    cv::waitKey(0);
 }
 
 void RunTest(int testId)
